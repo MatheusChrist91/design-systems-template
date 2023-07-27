@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { ChakraProvider } from '@chakra-ui/react'
+import SocialProfileSimple from "./components/Card"
 
 export default function App() {
   const [users, setUsers] = useState([]);
@@ -8,6 +10,8 @@ export default function App() {
     fetchUsers();
   }, []);
 
+  
+  
   const fetchUsers = async () => {
     try {
       const response = await axios.get(
@@ -22,9 +26,13 @@ export default function App() {
   };
 
   return (
-    <>
-      <h1>Me apague quando for iniciar!</h1>
-      <p>Chame o Card aqui!</p>
-    </>
+    <ChakraProvider>
+      {users.map((user) => {
+        console.log(user)
+        return <SocialProfileSimple user={user}/>
+      })}      
+    </ChakraProvider>
   );
 }
+
+//show de buela
